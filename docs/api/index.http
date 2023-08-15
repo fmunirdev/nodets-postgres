@@ -1,10 +1,18 @@
 @hostname = localhost
 @port = 8000
 @host = {{hostname}}:{{port}}
-@baseUrl = http://{{host}}/api
+@baseUrl = http://{{host}}/api/v1
 
 GET http://{{host}}/
 
 ###
+GET {{baseUrl}}/health
 
-GET {{baseUrl}}/
+###
+POST {{baseUrl}}/users/
+Content-Type: application/json
+
+{
+  "name": "sample",
+  "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
