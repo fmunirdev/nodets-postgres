@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  api:
+    container_name: api
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./src:/app/src
+    environment:
+      - PORT=8000
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+      # args:
+      #   INSTALL_DEV: ${INSTALL_DEV-true}
+    # depends_on:
+    #   - mongo
