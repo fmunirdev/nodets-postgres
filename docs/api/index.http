@@ -1,0 +1,10 @@
+@hostname = localhost
+@port = 8000
+@host = {{hostname}}:{{port}}
+@baseUrl = http://{{host}}/api
+
+GET http://{{host}}/
+
+###
+
+GET {{baseUrl}}/
