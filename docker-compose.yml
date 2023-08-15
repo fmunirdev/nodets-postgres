@@ -7,11 +7,29 @@ services:
     volumes:
       - ./src:/app/src
     environment:
-      - PORT=8000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: sandman
+      DB_PASS: postgres@123
+      DB_NAME: nodedb
     build:
       context: ./
       dockerfile: Dockerfile.dev
       # args:
       #   INSTALL_DEV: ${INSTALL_DEV-true}
-    # depends_on:
-    #   - mongo
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-bullseye
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: sandman
+      POSTGRES_PASSWORD: postgres@123
+      POSTGRES_DB: nodedb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
