@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import sequelize from './db';
-import apiRoutes from './api';
+import apiRoutes from './routes';
 
 dotenv.config();
 
