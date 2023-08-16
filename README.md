@@ -48,3 +48,6 @@ docker compose down
 <OR>
 docker-compose down
 ```
+
+### Screencast demo
+https://github.com/fmunirdev/nodets-postgres/assets/25113752/2cf8a38d-09a3-41db-a75b-caf1e95d49d8
