@@ -6,11 +6,13 @@ import {
   CreationOptional,
 } from 'sequelize';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
 import sequelize from '../db';
 
 const SALT_ROUNDS = 12;
 
-interface UserModel
+export interface UserModel
   extends Model<
     InferAttributes<UserModel>,
     InferCreationAttributes<UserModel>
@@ -19,6 +21,8 @@ interface UserModel
   name: string;
   email: string;
   password: string;
+  comparePassowrd(candidate: string): Promise<boolean>;
+  generateToken(): Promise<string>;
 }
 
 const User = sequelize.define<UserModel>(
@@ -44,6 +48,17 @@ const User = sequelize.define<UserModel>(
 
 User.prototype.comparePassowrd = async function (candidate: string) {
   return await bcrypt.compare(candidate, this.password);
+};
+
+User.prototype.generateToken = function () {
+  return jwt.sign(
+    {
+      id: this.id,
+      username: this.email,
+      exp: Math.floor(Date.now() / 1000) + 900, // 15 minutes
+    },
+    process.env.JWT_SECRET as jwt.Secret,
+  );
 };
 
 User.sync();

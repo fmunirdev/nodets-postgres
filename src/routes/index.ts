@@ -1,12 +1,14 @@
 import { Router, Request, Response } from 'express';
+import passport from 'passport';
 
 import sequelize from '../db';
+import authRoute from './auth';
 import usersRoute from './users';
 
 const router = Router();
 
 export default () => {
-  // const securedRoute = passport.authenticate('jwt', { session: false })
+  const securedRoute = passport.authenticate('jwt', { session: false });
 
   router.get('/health', async (req: Request, res: Response) => {
     let dbStatus = '';
@@ -24,8 +26,8 @@ export default () => {
     res.json(health);
   });
 
-  // router.use('/users', securedRoute, usersRoute());
-  router.use('/users', usersRoute());
+  router.use('/', authRoute());
+  router.use('/users', securedRoute, usersRoute());
 
   return router;
 };

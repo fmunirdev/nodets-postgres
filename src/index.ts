@@ -1,12 +1,16 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
+import passport from 'passport';
+
 import sequelize from './db';
 import apiRoutes from './routes';
+import './utils/auth';
 
 dotenv.config();
 
 const app: Express = express();
 app.use(express.json());
+app.use(passport.initialize());
 
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 8000;
