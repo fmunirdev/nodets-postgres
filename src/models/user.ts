@@ -61,6 +61,6 @@ User.prototype.generateToken = function () {
   );
 };
 
-User.sync();
+// User.sync();
 
 export default User;

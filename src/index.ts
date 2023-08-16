@@ -28,7 +28,10 @@ sequelize
     app.listen(port, () => {
       console.log(`⚡️[server]: Server is running at http://${host}:${port}`);
 
-      seedSuperuser(); // creates first user record in db if doesn't exist
+      // creates user table and first record if doesn't exist
+      sequelize.sync().then(() => {
+        seedSuperuser();
+      });
     });
   })
   .catch((err) => console.error('Unable to connect to the database:', err));
