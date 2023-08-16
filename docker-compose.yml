@@ -7,6 +7,9 @@ services:
     volumes:
       - ./src:/app/src
     environment:
+      JWT_SECRET: supersecret
+      SU_USERNAME: superuser@example.com
+      SU_PASSWORD: SandMan@123
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: sandman
