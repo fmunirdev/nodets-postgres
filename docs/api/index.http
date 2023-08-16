@@ -2,6 +2,7 @@
 @port = 8000
 @host = {{hostname}}:{{port}}
 @baseUrl = http://{{host}}/api/v1
+@authToken = {{login.response.body.accessToken}}
 
 GET http://{{host}}/
 
@@ -9,10 +10,22 @@ GET http://{{host}}/
 GET {{baseUrl}}/health
 
 ###
+# @name login
+POST {{baseUrl}}/login/
+Content-Type: application/json
+
+{
+  "username": "superuser@example.com",
+  "password": "SandMan@123"
+}
+
+###
 GET {{baseUrl}}/users/
+Authorization: Bearer {{authToken}}
 
 ###
 POST {{baseUrl}}/users/
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
@@ -23,9 +36,11 @@ Content-Type: application/json
 
 ###
 GET {{baseUrl}}/users/<user.id>
+Authorization: Bearer {{authToken}}
 
 ###
 PUT {{baseUrl}}/users/<user.id>
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
@@ -36,3 +51,4 @@ Content-Type: application/json
 
 ###
 DELETE  {{baseUrl}}/users/<user.id>
+Authorization: Bearer {{authToken}}
