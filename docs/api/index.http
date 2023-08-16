@@ -9,10 +9,30 @@ GET http://{{host}}/
 GET {{baseUrl}}/health
 
 ###
+GET {{baseUrl}}/users/
+
+###
 POST {{baseUrl}}/users/
 Content-Type: application/json
 
 {
-  "name": "sample",
-  "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+  "name": "SandMan-2.1",
+  "email": "sandman2@example.com",
+  "password": "SandMan@123"
 }
+
+###
+GET {{baseUrl}}/users/<user.id>
+
+###
+PUT {{baseUrl}}/users/<user.id>
+Content-Type: application/json
+
+{
+  "name": "SandMan-2.3",
+  "email": "sandman2.3@example.com",
+  "password": "SandMan@123"
+}
+
+###
+DELETE  {{baseUrl}}/users/<user.id>
